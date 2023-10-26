@@ -1,27 +1,17 @@
-#include "lists.h"
+#include "main.h"
 
 /**
- * add_nodeint - Adds a new node at the beginning
- *               of a listint_t list.
- * @head: A pointer to the address of the
- *        head of the listint_t list.
- * @n: The integer for the new node to contain.
- *
- * Return: If the function fails - NULL.
- *         Otherwise - the address of the new element.
+ *get_bit - Gets the value of a bit at a given index.
+ *@n: The bit.
+ *@index: The index to get the value at - indices start at 0.
+ *Return: If an error occurs - -1.
+ *Otherwise - The value of bit at index.
  */
-listint_t *add_nodeint(listint_t **head, const int n)
+int get_bit(unsigned long int n, unsigned int index)
 {
-	listint_t *new;
-
-	new = malloc(sizeof(listint_t));
-	if (new == NULL)
-		return (NULL);
-
-	new->n = n;
-	new->next = *head;
-
-	*head = new;
-
-	return (new);
+	if (index >= (sizeof(unsigned long int) * 8))
+		return (-1);
+	if ((n & (1 << index)) == 0)
+		return (0);
+	return (1);
 }
